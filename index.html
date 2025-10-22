@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recette Végé du Jour 🥦</title>
+    <!-- Chargement de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Polices "2025" : Lora (Serif) pour les titres, Nunito Sans (Sans) pour le corps -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Définition des polices personnalisées pour Tailwind */
+        body {
+            /* Police par défaut (corps) */
+            font-family: 'Nunito Sans', sans-serif;
+            background-color: #FFFBF7; /* Un beige très clair et chaleureux */
+        }
+        
+        .font-serif {
+            font-family: 'Lora', serif;
+        }
+
+        /* Animations "Parallax" / "Scroll Reveal" (ici, au chargement) */
+        
+        /* Animation pour le texte (glisse vers le haut + fondu) */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Animation pour l'image (zoom arrière + fondu) */
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(1.05);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        /* Classe utilitaire pour appliquer l'animation */
+        .animate-fadeInUp {
+            /* Assure que l'élément reste visible après l'animation */
+            animation: fadeInUp 0.7s ease-out forwards;
+            /* Propriété pour la performance */
+            will-change: transform, opacity;
+            /* Commence invisible */
+            opacity: 0; 
+        }
+
+        .animate-scaleIn {
+            animation: scaleIn 0.9s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            will-change: transform, opacity;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased">
+
+    <!-- Grille principale asymétrique pour un look moderne -->
+    <!-- Sur mobile: une seule colonne. Sur bureau: 5 colonnes (2 pour le header, 3 pour la recette) -->
+    <div class="container mx-auto max-w-7xl p-4 py-8 md:py-16 md:grid md:grid-cols-5 md:gap-12 lg:gap-16">
+
+        <!-- PARTIE GAUCHE (Sticky) -->
+        <!-- Devient une colonne latérale collante sur les grands écrans -->
+        <header class="md:col-span-2 md:sticky md:top-8 md:h-screen">
+            <!-- Titre principal avec l'icône SVG pour un look plus net -->
+            <div class="animate-fadeInUp" style="animation-delay: 100ms;">
+                <h1 class="font-serif text-5xl md:text-6xl font-bold text-green-900">
+                    <span class="flex items-center gap-3">
+                        <!-- Icône de feuille simple (plus élégant que l'emoji) -->
+                        <svg class="w-10 h-10 text-green-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 9.75a2.25 2.25 0 01-2.25 2.25h-8.25a2.25 2.25 0 01-2.25-2.25V3.75a2.25 2.25 0 012.25-2.25h8.25a2.25 2.25 0 012.25 2.25v6zm-9.75 3.75a2.25 2.25 0 01-2.25 2.25h-8.25a2.25 2.25 0 01-2.25-2.25V7.5a2.25 2.25 0 012.25-2.25h8.25a2.25 2.25 0 012.25 2.25v6.75z" />
+                        </svg>
+                        Recette
+                    </span>
+                    Végé du Jour
+                </h1>
+                <p class="mt-4 text-lg text-gray-600">
+                    Une nouvelle idée simple et délicieuse, chaque jour, juste pour vous.
+                </p>
+            </div>
+
+            <!-- Espace réservé pour l'image (l'IA ne peut pas générer d'images) -->
+            <!-- Cette image "parallax" (animée) donne le ton "2025" -->
+            <!-- BLOC IMAGE SUPPRIMÉ -->
+        </header>
+
+        <!-- PARTIE DROITE (Contenu) -->
+        <!-- La recette apparaît ici et est scrollable sur bureau -->
+        <main class="md:col-span-3 mt-12 md:mt-0">
+            
+            <!-- Conteneur pour la recette (initialement caché, révélé par JS) -->
+            <div id="recipe-content" class="opacity-0 space-y-8">
+                
+                <!-- Titre de la recette -->
+                <h2 id="recipe-title-el" class="font-serif text-4xl md:text-5xl font-bold text-gray-900 animate-fadeInUp" style="animation-delay: 500ms;">
+                    Chargement...
+                </h2>
+
+                <!-- Section Ingrédients -->
+                <section class="animate-fadeInUp" style="animation-delay: 600ms;">
+                    <h3 class="font-serif text-3xl font-semibold text-green-800 border-b-2 border-green-100 pb-3 mb-4">
+                        Ingrédients
+                    </h3>
+                    <ul id="recipe-ingredients-list" class="list-none space-y-3">
+                        <!-- Les <li> seront animés et ajoutés par JS -->
+                    </ul>
+                </section>
+
+                <!-- Section Instructions -->
+                <section class="animate-fadeInUp" style="animation-delay: 700ms;">
+                    <h3 class="font-serif text-3xl font-semibold text-green-800 border-b-2 border-green-100 pb-3 mb-4">
+                        Instructions
+                    </h3>
+                    <ol id="recipe-instructions-list" class="list-none space-y-4">
+                        <!-- Les <li> seront animés et ajoutés par JS -->
+                    </ol>
+                </section>
+            </div>
+
+            <!-- Message d'erreur (caché par défaut) -->
+            <div id="error-message" class="hidden text-center text-red-600 bg-red-100 p-6 rounded-lg">
+                Impossible de charger la recette pour le moment.
+            </div>
+        </main>
+    </div>
+
+
+    <!-- 
+      BLOC DE DONNÉES DE LA RECETTE (INCHANGÉ)
+      L'action GitHub va rechercher ces marqueurs
+      et remplacer le contenu entre eux.
+    -->
+    <script>
+    // RECIPE_DATA_START
+    const recipeData = {
+      "titre": "Recette initiale (en attente de l'action)",
+      "ingredients": [
+        "1 boîte de pois chiches",
+        "1/2 concombre",
+        "1 poivron rouge",
+        "Jus de 1 citron",
+        "2 cuillères à soupe d'huile d'olive"
+      ],
+      "instructions": [
+        "Mélangez pois chiches, concombre et poivron.",
+        "Arrosez de jus de citron et d'huile d'olive.",
+        "Salez, poivrez et servez."
+      ]
+    };
+    // RECIPE_DATA_END
+    </script>
+    <!-- FIN DU BLOC DE DONNÉES -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Nouveaux sélecteurs pour les éléments de la recette
+            const recipeContentEl = document.getElementById('recipe-content');
+            const titleEl = document.getElementById('recipe-title-el'); // Changé
+            const ingredientsEl = document.getElementById('recipe-ingredients-list'); // Changé
+            const instructionsEl = document.getElementById('recipe-instructions-list'); // Changé
+            const errorEl = document.getElementById('error-message');
+            // const imageEl = document.getElementById('recipe-image'); // Sélecteur d'image supprimé
+
+            // Fonction pour charger la recette
+            function loadRecipe() {
+                try {
+                    if (typeof recipeData === 'undefined' || !recipeData.titre) {
+                        throw new Error("Les données de la recette sont manquantes.");
+                    }
+
+                    // Remplir le titre
+                    titleEl.textContent = recipeData.titre;
+                    
+                    // Logique de l'image supprimée
+                    
+                    // Vider les listes (au cas où il y aurait un fallback)
+                    ingredientsEl.innerHTML = '';
+                    instructionsEl.innerHTML = '';
+
+                    // Ajouter les ingrédients avec le nouveau style
+                    recipeData.ingredients.forEach((ingredient, index) => {
+                        const li = document.createElement('li');
+                        // Ajout d'une case à cocher stylisée
+                        li.innerHTML = `
+                            <label class="flex items-center text-lg text-gray-700 cursor-pointer">
+                                <input type="checkbox" class="form-checkbox h-5 w-5 text-green-600 rounded-md border-gray-300 focus:ring-green-500 mr-4">
+                                <span>${ingredient}</span>
+                            </label>
+                        `;
+                        // Appliquer l'animation en décalé (stagger)
+                        li.classList.add('animate-fadeInUp');
+                        li.style.animationDelay = `${700 + index * 100}ms`; // Décalage
+                        ingredientsEl.appendChild(li);
+                    });
+
+                    // Ajouter les instructions avec le nouveau style
+                    recipeData.instructions.forEach((step, index) => {
+                        const li = document.createElement('li');
+                        // Numérotation stylisée
+                        li.innerHTML = `
+                            <div class="flex items-start">
+                                <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-green-800 text-white font-serif font-bold text-lg mr-4">
+                                    ${index + 1}
+                                </span>
+                                <span class="text-lg text-gray-700">${step}</span>
+                            </div>
+                        `;
+                        // Appliquer l'animation en décalé
+                        li.classList.add('animate-fadeInUp');
+                        li.style.animationDelay = `${900 + index * 150}ms`; // Décalage plus long
+                        instructionsEl.appendChild(li);
+                    });
+
+                    // Révéler le conteneur principal de la recette
+                    recipeContentEl.style.opacity = '1';
+                    
+                    // (Les animations sur le titre et les en-têtes sont gérées par CSS)
+
+                } catch (error) {
+                    console.error('Erreur lors du chargement de la recette:', error);
+                    recipeContentEl.classList.add('hidden');
+                    errorEl.classList.remove('hidden');
+                }
+            }
+
+            // Lancer le chargement
+            loadRecipe();
+        });
+    </script>
+</body>
+</html>
+
+
+

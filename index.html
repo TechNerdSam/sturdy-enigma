@@ -81,19 +81,18 @@
                 <h1 class="font-serif text-5xl md:text-6xl font-bold text-green-900">
                     <span class="flex items-center gap-3">
                         <!-- Icône de feuille simple (plus élégant que l'emoji) -->
-                        <!-- SVG Icon Removed -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+                            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9 9a1 1 0 012 0v6a1 1 0 11-2 0V9z" />
+                        </svg>
                         Recette
                     </span>
                     Végé du Jour
                 </h1>
                 <p class="mt-4 text-lg text-gray-600">
-                    Une nouvelle idée simple et délicieuse, chaque jour, juste pour vous.
+                    Une nouvelle idée simple et délicieuse, juste pour vous.
                 </p>
             </div>
-
-            <!-- Espace réservé pour l'image (l'IA ne peut pas générer d'images) -->
-            <!-- Cette image "parallax" (animée) donne le ton "2025" -->
-            <!-- BLOC IMAGE SUPPRIMÉ -->
         </header>
 
         <!-- PARTIE DROITE (Contenu) -->
@@ -138,42 +137,136 @@
 
 
     <!-- 
-      BLOC DE DONNÉES DE LA RECETTE (INCHANGÉ)
-      L'action GitHub va rechercher ces marqueurs
-      et remplacer le contenu entre eux.
+      BLOC DE DONNÉES DE LA RECETTE (MODIFIÉ)
+      Ceci est maintenant une LISTE de recettes (un Array)
     -->
     <script>
     // RECIPE_DATA_START
-    const recipeData = {
-      "titre": "Recette initiale (en attente de l'action)",
-      "ingredients": [
-        "1 boîte de pois chiches",
-        "1/2 concombre",
-        "1 poivron rouge",
-        "Jus de 1 citron",
-        "2 cuillères à soupe d'huile d'olive"
-      ],
-      "instructions": [
-        "Mélangez pois chiches, concombre et poivron.",
-        "Arrosez de jus de citron et d'huile d'olive.",
-        "Salez, poivrez et servez."
-      ]
-    };
+    // Une liste de recettes qui tournera toutes les 5 minutes
+    const allRecipes = [
+      {
+        "titre": "Salade de Pois Chiches Arc-en-ciel",
+        "ingredients": [
+          "1 boîte de pois chiches, rincés",
+          "1/2 concombre, en dés",
+          "1 poivron rouge, en dés",
+          "1 poivron jaune, en dés",
+          "1/4 oignon rouge, haché fin",
+          "Jus de 1 citron",
+          "3 cuillères à soupe d'huile d'olive",
+          "Persil frais, haché"
+        ],
+        "instructions": [
+          "Dans un grand bol, combinez les pois chiches, le concombre, les poivrons et l'oignon rouge.",
+          "Dans un petit bol, fouetter le jus de citron, l'huile d'olive, le sel et le poivre.",
+          "Versez la vinaigrette sur la salade et mélangez bien.",
+          "Incorporez le persil frais juste avant de servir.",
+          "Laissez reposer 10 minutes pour que les saveurs se mélangent."
+        ]
+      },
+      {
+        "titre": "Tacos Rapides aux Haricots Noirs",
+        "ingredients": [
+          "1 boîte de haricots noirs, rincés",
+          "1 cuillère à café de cumin",
+          "1/2 cuillère à café de poudre de chili",
+          "4-6 tortillas de maïs",
+          "Garnitures : avocat, coriandre, salsa, citron vert"
+        ],
+        "instructions": [
+          "Écrasez légèrement les haricots noirs dans une petite casserole avec le cumin et la poudre de chili.",
+          "Chauffez à feu moyen jusqu'à ce que ce soit chaud.",
+          "Réchauffez les tortillas dans une poêle sèche ou au micro-ondes.",
+          "Garnissez les tortillas avec le mélange de haricots et vos garnitures préférées."
+        ]
+      },
+      {
+        "titre": "Pâtes à l'Ail, Huile d'Olive et Brocoli",
+        "ingredients": [
+          "200g de spaghettis",
+          "1 tête de brocoli, coupée en fleurettes",
+          "4 gousses d'ail, émincées",
+          "1/4 tasse d'huile d'olive",
+          "Flocons de piment rouge (optionnel)",
+          "Sel et poivre"
+        ],
+        "instructions": [
+          "Cuire les pâtes selon les instructions. Ajouter le brocoli pendant les 3-4 dernières minutes de cuisson.",
+          "Pendant ce temps, chauffer l'huile d'olive dans une grande poêle à feu moyen.",
+          "Ajouter l'ail et les flocons de piment, cuire 1-2 minutes jusqu'à ce que l'ail soit parfumé (ne pas le brûler).",
+          "Égoutter les pâtes et le brocoli (réserver un peu d'eau de cuisson).",
+          "Ajouter les pâtes, le brocoli et un peu d'eau de cuisson à la poêle avec l'ail. Bien mélanger.",
+          "Assaisonner avec du sel et du poivre. Servir immédiatement."
+        ]
+      },
+      {
+        "titre": "Curry de Lentilles Corail Express",
+        "ingredients": [
+          "1 tasse de lentilles corail, rincées",
+          "1 oignon, haché",
+          "2 gousses d'ail, hachées",
+          "1 boîte de lait de coco (400ml)",
+          "1 boîte de tomates concassées (400g)",
+          "1 cuillère à soupe de pâte de curry (rouge ou jaune)",
+          "1 cuillère à café de curcuma",
+          "2 tasses de bouillon de légumes"
+        ],
+        "instructions": [
+          "Dans une grande casserole, faire revenir l'oignon et l'ail dans un peu d'huile.",
+          "Ajouter la pâte de curry et le curcuma, cuire 1 minute.",
+          "Ajouter les lentilles rincées, le lait de coco, les tomates concassées et le bouillon.",
+          "Porter à ébullition, puis réduire le feu et laisser mijoter 15-20 minutes.",
+          "Saler et poivrer au goût. Servir avec du riz."
+        ]
+      }
+    ];
     // RECIPE_DATA_END
     </script>
     <!-- FIN DU BLOC DE DONNÉES -->
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Nouveaux sélecteurs pour les éléments de la recette
+            // Sélecteurs pour les éléments de la recette
             const recipeContentEl = document.getElementById('recipe-content');
-            const titleEl = document.getElementById('recipe-title-el'); // Changé
-            const ingredientsEl = document.getElementById('recipe-ingredients-list'); // Changé
-            const instructionsEl = document.getElementById('recipe-instructions-list'); // Changé
+            const titleEl = document.getElementById('recipe-title-el');
+            const ingredientsEl = document.getElementById('recipe-ingredients-list');
+            const instructionsEl = document.getElementById('recipe-instructions-list');
             const errorEl = document.getElementById('error-message');
-            // const imageEl = document.getElementById('recipe-image'); // Sélecteur d'image supprimé
+
+            // === NOUVELLE LOGIQUE POUR CHOISIR LA RECETTE ===
+            let recipeData; // La recette que nous allons afficher
+
+            try {
+                if (typeof allRecipes === 'undefined' || allRecipes.length === 0) {
+                    throw new Error("La liste 'allRecipes' est vide ou non définie.");
+                }
+                
+                const now = new Date();
+                const minutes = now.getMinutes();
+                
+                // Calcule un index basé sur des tranches de 5 minutes
+                // (0-4min -> 0, 5-9min -> 1, ... 55-59min -> 11)
+                const intervalIndex = Math.floor(minutes / 5); 
+                
+                // Utilise le modulo (%) pour "boucler" dans la liste
+                // si on n'a pas 12 recettes.
+                const recipeIndex = intervalIndex % allRecipes.length;
+
+                // Assigne la recette du moment
+                recipeData = allRecipes[recipeIndex];
+
+            } catch (error) {
+                // Gère le cas où les données sont absentes
+                console.error(error.message);
+                recipeContentEl.classList.add('hidden');
+                errorEl.classList.remove('hidden');
+                return; // Arrêter l'exécution
+            }
+            // === FIN DE LA NOUVELLE LOGIQUE ===
+
 
             // Fonction pour charger la recette
+            // Elle utilise la variable 'recipeData' définie ci-dessus
             function loadRecipe() {
                 try {
                     if (typeof recipeData === 'undefined' || !recipeData.titre) {
@@ -182,8 +275,6 @@
 
                     // Remplir le titre
                     titleEl.textContent = recipeData.titre;
-                    
-                    // Logique de l'image supprimée
                     
                     // Vider les listes (au cas où il y aurait un fallback)
                     ingredientsEl.innerHTML = '';
@@ -225,8 +316,6 @@
 
                     // Révéler le conteneur principal de la recette
                     recipeContentEl.style.opacity = '1';
-                    
-                    // (Les animations sur le titre et les en-têtes sont gérées par CSS)
 
                 } catch (error) {
                     console.error('Erreur lors du chargement de la recette:', error);
@@ -241,7 +330,3 @@
     </script>
 </body>
 </html>
-
-
-
-
